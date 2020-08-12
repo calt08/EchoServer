@@ -7,4 +7,10 @@ s.listen(5)
 while True:
     clientsocket, adress = s.accept()
     print(f"Connected to {adress}")
-    clientsocket.send(bytes("Welcome!", "utf-8"))
+    # clientsocket.send(bytes("Welcome!", "utf-8"))
+    msg = clientsocket.recv(1024)  # buffer
+    msgData = msg.decode("utf-8")
+    print("Recieved:" + msgData)
+    print("Sending text...")
+    clientsocket.send(msg)
+    print("Text Sent!")
